@@ -47,7 +47,7 @@ exports.getReservations = async (req,res,next) => {
 
 exports.getReservation = async (req, res, next) => {
     try {
-        const appointment = await Appointment.findById(req.params.id).populate({
+        const appointment = await Reservation.findById(req.params.id).populate({
             path : 'workingSpace',
             select : 'name description tel'
         });
@@ -63,7 +63,7 @@ exports.getReservation = async (req, res, next) => {
 
     }catch(err){
         console.log(err.message);
-        return res.status(500).json({success:false,message:"Cannot find Appointment"});
+        return res.status(500).json({success:false,message:"Cannot find Reservation"});
     }
 }
 
