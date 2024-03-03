@@ -6,10 +6,10 @@ const reservationRouter = require('./reservation');
 const router = express.Router();
 const {protect, authorize} = require('../middleware/auth');
 
-router.use('/:workingSpaceId/reservation/' ,reservationRouter);
+router.use('/:workingSpaceId/reservation' ,reservationRouter);
 
 // router.route('/vacCenters').get(getVacCenters);
-router.route('/').get(getWorkingSpaces).post(protect, authorize('admin'),createWorkingSpace);
+router.route('/').get(protect,getWorkingSpaces).post(protect, authorize('admin'),createWorkingSpace);
 router.route('/:id').get(getWorkingSpace).put(protect, authorize('admin'),updateWorkingSpace).delete(protect,authorize('admin'),deleteWorkingSpace);
 
-module.exports = router;
+module.exports = router;    

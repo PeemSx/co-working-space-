@@ -17,8 +17,14 @@ exports.getWorkingSpaces = async (req, res, next) => {
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
         // const hospitals = await Hospital.find(req.query);
         // console.log(req.query);
+        if(req.user.role === 'admin'){
+            console.log("here");
+            query = WorkingSpace.find(JSON.parse(queryStr)).populate('reservation');
+        }else{
+            console.log("here111");
+            query = WorkingSpace.find(JSON.parse(queryStr));
+        }
 
-        query = WorkingSpace.find(JSON.parse(queryStr)).populate('reservation');
 
         if(req.query.select){
             const fields = req.query.select.split(',').join(' ');
